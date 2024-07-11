@@ -24,7 +24,7 @@ export default {
         originalHeight: 188,
         flyHeight: 40,
         flyTime: 100,
-        dropTime: 1400,
+        dropTime: 2000,
         timestamp: 0,
     },
     pipings: {
