@@ -16,6 +16,11 @@ export default function App({ state, actions, record }) {
       land: true,
       sliding: isPlaying,
     })
+    if (window.location.hash.slice(1).includes('tdesktop')) {
+        return <div>
+            <p>Играй на мобилке</p>
+        </div>
+    }
     return (
       <div className="game">
         <div className="scene" onMouseDown={onFlyUp} onTouchStart={onFlyUp}>
