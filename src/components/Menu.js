@@ -1,17 +1,8 @@
-import React , { useState , useEffect} from 'react'
+import React   from 'react'
 
 export default function Menu({ score, onPlay, onReplay, onReverse }) {
-	const [username, setUsername] = useState('')
-	useEffect(() => {
-			/*global Telegram */
-			if (Telegram.WebApp.initDataUnsafe.user) {
-				const wb = Telegram.WebApp.initDataUnsafe.user
-				setUsername(wb.first_name)
-			} else {
-				setUsername('Test')
-			}
-		}
-	)
+	/*global Telegram */
+	const username  = Telegram.WebApp.initDataUnsafe.user ?   Telegram.WebApp.initDataUnsafe.user : 'Test'
 	return (
 		<div className="menu c-wrap">
 			<ul className="c-inner">
