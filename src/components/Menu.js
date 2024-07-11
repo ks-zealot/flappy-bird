@@ -2,7 +2,7 @@ import React   from 'react'
 
 export default function Menu({ score, onPlay, onReplay, onReverse }) {
 	/*global Telegram */
-	const username  = Telegram.WebApp.initDataUnsafe.user ?   Telegram.WebApp.initDataUnsafe.user : 'Test'
+	const username  = Telegram.WebApp.initDataUnsafe.user ?   Telegram.WebApp.initDataUnsafe.user.first_name : 'Test'
 	return (
 		<div className="menu c-wrap">
 			<ul className="c-inner">
