@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import Bird from './components/Bird'
 import Piping from './components/Piping'
 import Menu from './components/Menu'
+import flbr from './images/flbr.png'
 
 export default function App({state, actions, record}) {
     let {bird, pipings, game, player} = state
@@ -16,9 +17,11 @@ export default function App({state, actions, record}) {
         land: true,
         sliding: isPlaying,
     })
-    if (window.location.hash.slice(1).includes('tdesktop') || window.location.hash.slice(1).includes('macos')) {
-        return <div style={"position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"}>
-            <img src={"../images/fibr.png"}/>
+    if (!window.location.hash || window.location.hash.slice(1).includes('tdesktop') || window.location.hash.slice(1).includes('macos')) {
+        let style = { position: `fixed`, top: `50%`, left: `50%`,  transform: `translate(-50%, -50%)`  }
+
+        return <div style={style}>
+            <img src={flbr}/>
         </div>
     }
     return (
