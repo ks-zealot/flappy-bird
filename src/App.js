@@ -17,8 +17,8 @@ export default function App({state, actions, record}) {
         sliding: isPlaying,
     })
     if (window.location.hash.slice(1).includes('tdesktop') || window.location.hash.slice(1).includes('macos')) {
-        return <div>
-            <p>Играй на мобилке</p>
+        return <div style={"position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"}>
+            <img src={"../images/fibr.png"}/>
         </div>
     }
     return (
