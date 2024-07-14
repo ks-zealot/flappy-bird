@@ -1,6 +1,6 @@
 import React   from 'react'
 
-export default function Menu({ score, onPlay, onReplay, onReverse }) {
+export default function Menu({ score, onPlay, showLeaderboard, onReplay, onReverse }) {
 	/*global Telegram */
 	const username  = Telegram.WebApp.initDataUnsafe.user ?   Telegram.WebApp.initDataUnsafe.user.first_name : 'Test'
 	return (
@@ -10,16 +10,19 @@ export default function Menu({ score, onPlay, onReplay, onReverse }) {
 				<li>
 					<div className="btn" onMouseDown={onPlay} onTouchStart={onPlay}>play</div>
 				</li>
-				{ onReplay && 
+				{onReplay &&
 					<li>
 						<div className="btn" onMouseDown={onReplay} onTouchStart={onReplay}>replay</div>
 					</li>
 				}
-				{ onReplay && 
+				{onReplay &&
 					<li>
 						<div className="btn" onMouseDown={onReverse} onTouchStart={onReverse}>reverse</div>
 					</li>
 				}
+				<li>
+					<div className="btn" onMouseDown={showLeaderboard} onTouchStart={showLeaderboard}>leaders</div>
+				</li>
 			</ul>
 		</div>
 	)
