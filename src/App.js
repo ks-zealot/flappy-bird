@@ -70,12 +70,12 @@ export default function App({state, actions, record}) {
             <div style={s} className="scene" id={"leaderboard"}>
                 <div className="menu c-wrap">
                     <div className={"c-inner"}>
-                        <div>Leaderboard</div>
-                        <div>Place Name Score</div>
+                        <div className={"position_container"}> Leaderboard</div>
+                        <div className={"position_container"}>Place Name Score</div>
                         <div className={"list_container"}>
                             <ol>{users.map(user => <li>{user.name} {user.score}</li>)}</ol>
                         </div>
-                        <div>Your score is {currentUser.score}, your place is {currentUser.position}</div>
+                        <div className={"position_container"}>Your score is {currentUser.score}, your place is {currentUser.position}</div>
                         <br/>
                         <div className="btn" onMouseDown={returnToMainScreen} onTouchStart={returnToMainScreen}>Return
                         </div>

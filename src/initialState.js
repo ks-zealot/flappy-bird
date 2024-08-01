@@ -27,10 +27,11 @@ export default {
         dropTime: 2500,
         timestamp: 0,
     },
+
     pipings: {
         timestamp: 0,
         interval: 2600,
-        speed: 3800,
+        speed: 1800,
         size: {
             width: 52,
         },

@@ -147,3 +147,11 @@ body {
 	z-index: 10;
 }
 
+.list_container {
+	color :black
+}
+
+.position_container {
+	color :black;
+	text-align: center;
+}
