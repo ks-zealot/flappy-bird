@@ -77,7 +77,7 @@ export default function App({state, actions, record}) {
                         </div>
                         <div className={"position_container"}>Your score is {currentUser.score}, your place is {currentUser.position}</div>
                         <br/>
-                        <div className="btn" onMouseDown={returnToMainScreen} onTouchStart={returnToMainScreen}>Return
+                        <div className="btn position_container" onMouseDown={returnToMainScreen} onTouchStart={returnToMainScreen}>Return
                         </div>
                     </div>
                 </div>
