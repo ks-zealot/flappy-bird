@@ -24,13 +24,13 @@ export default {
         originalHeight: 188,
         flyHeight: 30,
         flyTime: 150,
-        dropTime: 2000,
+        dropTime: 2500,
         timestamp: 0,
     },
     pipings: {
         timestamp: 0,
-        interval: 1600,
-        speed: 2800,
+        interval: 2600,
+        speed: 3800,
         size: {
             width: 52,
         },
