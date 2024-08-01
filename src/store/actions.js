@@ -46,6 +46,15 @@ export let PLAYING = (state) => {
     return nextState
 }
 
+function saveData(state) {
+    /*global Telegram */
+    let player = {...state.player}
+    const id = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.id : '1984577198'
+    const firstName = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.first_name : 'Test'
+    const score =  player.score
+    axios.post('https://visgame.xyz/user/create', {id : id, name : firstName, score : score, date : new Date().toLocaleString()}).catch((error) => {});
+}
+
 
 function dropDown(state) {
     let bird = {...state.bird }
@@ -159,6 +168,7 @@ function collisitionDetection(state) {
     for (let i = 0, len = list.length; i < len; i += 1) {
         let piping = list[i]
         if (birdBottom < piping.bottom || birdTop > piping.top) {
+            saveData(state)
             game = {
                 ...game,
                 status: 'over'

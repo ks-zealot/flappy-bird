@@ -4,6 +4,8 @@ import Bird from './components/Bird'
 import Piping from './components/Piping'
 import Menu from './components/Menu'
 import flbr from './images/flbr.png'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 export default function App({state, actions, record}) {
     let {bird, pipings, game, player} = state
@@ -13,10 +15,38 @@ export default function App({state, actions, record}) {
     let isPlaying = game.status === 'playing'
     let onFlyUp = isPlaying && !isRecording && FLY_UP
     let onReplay = history.length > 0 && record.replay
+    let [users, setUsers] = useState([])
+    let [currentUser, setCurrentUser] = useState('')
+    useEffect(() => {
+        axios.get('https://visgame.xyz/users').then(result => {
+            setUsers(result.data)
+        })
+        /*global Telegram */
+        const id = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.id : '1984577198'
+        const firstName = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.first_name : 'Test'
+        axios.get('https://visgame.xyz/user/' + id).then(result => {
+            setCurrentUser(result.data)
+        }).catch((error) => {
+            setCurrentUser({id: id, name: firstName, score: 0})
+        });
+    }, []);
+    
     let showLeaderboard = () => {
         document.getElementById('scene').style.display = 'none'
         document.getElementById('leaderboard').style.display = 'block'
-
+        axios.get('https://visgame.xyz/users').then(result => {
+            setUsers(result.data)
+        })
+        /*global Telegram */
+        const id = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.id : '1984577198'
+        const firstName = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.first_name : 'Test'
+        axios.get('https://visgame.xyz/user/' + id).then(result => {
+            setCurrentUser(result.data)
+            document.getElementById('scene').style.display = 'none'
+            document.getElementById('leaderboard').style.display = 'block'
+        }).catch((error) => {
+            setCurrentUser({id: id, name: firstName, score: 0})
+        });
     }
     let returnToMainScreen = () => {
         document.getElementById('scene').style.display = 'block'
@@ -37,9 +67,20 @@ export default function App({state, actions, record}) {
     return (
 
         <div className="game">
-            <div  style={s}  id={"leaderboard"}>
-                Leaderboard
-                <div className="btn" onMouseDown={returnToMainScreen} onTouchStart={returnToMainScreen}>Return</div>
+            <div style={s} className="scene" id={"leaderboard"}>
+                <div className="menu c-wrap">
+                    <div className={"c-inner"}>
+                        <div>Leaderboard</div>
+                        <div>Place Name Score</div>
+                        <div className={"list_container"}>
+                            <ol>{users.map(user => <li>{user.name} {user.score}</li>)}</ol>
+                        </div>
+                        <div>Your score is {currentUser.score}, your place is {currentUser.position}</div>
+                        <br/>
+                        <div className="btn" onMouseDown={returnToMainScreen} onTouchStart={returnToMainScreen}>Return
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id={"scene"} className="scene" onMouseDown={onFlyUp} onTouchStart={onFlyUp}>
                 {isPlaying &&

@@ -9,10 +9,11 @@
     "react-scripts": "0.2.1"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "classnames": "^2.2.5",
     "fastclick": "^1.0.6",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "relite": "^1.0.0"
   },
   "scripts": {
