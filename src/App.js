@@ -30,7 +30,7 @@ export default function App({state, actions, record}) {
             setCurrentUser({id: id, name: firstName, score: 0})
         });
     }, []);
-    
+
     let showLeaderboard = () => {
         document.getElementById('scene').style.display = 'none'
         document.getElementById('leaderboard').style.display = 'block'
