@@ -30,8 +30,8 @@ export default {
 
     pipings: {
         timestamp: 0,
-        interval: 2600,
-        speed: 1800,
+        interval: 1600,
+        speed: 2800,
         size: {
             width: 52,
         },
