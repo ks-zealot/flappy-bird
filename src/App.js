@@ -5,7 +5,8 @@ import Piping from './components/Piping'
 import Menu from './components/Menu'
 import flbr from './images/flbr.png'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
+import AdminScreen from "./AdminScreen";
 
 export default function App({state, actions, record}) {
     let {bird, pipings, game, player} = state
@@ -17,6 +18,53 @@ export default function App({state, actions, record}) {
     let onReplay = history.length > 0 && record.replay
     let [users, setUsers] = useState([])
     let [currentUser, setCurrentUser] = useState('')
+
+    const showAdmin = () => {
+        if (window.location.pathname === "/admin") {
+            return <AdminScreen/>
+        }
+    }
+    const showGame = () => {
+        if (window.location.pathname !== "/admin") {
+            return <div className="game">
+
+                <div style={s} className="scene" id={"leaderboard"}>
+                    <div className="menu c-wrap">
+                        <div className={"c-inner"}>
+                            <div className={"position_container"}> Leaderboard</div>
+                            <div className={"position_container"}>Place Name Score</div>
+                            <div className={"list_container"}>
+                                <ol>{users.map(user => <li>{user.name} {user.score}</li>)}</ol>
+                            </div>
+                            <div className={"position_container"}>Your score is {currentUser.score}, your place
+                                is {currentUser.position}</div>
+                            <br/>
+                            <div className="btn position_container" onMouseDown={returnToMainScreen}
+                                 onTouchStart={returnToMainScreen}>Return
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id={"scene"} className="scene" onMouseDown={onFlyUp} onTouchStart={onFlyUp}>
+                    {isPlaying &&
+                        <div className="score">{player.score}</div>
+                    }
+                    <Bird {...bird} isFlying={isPlaying}/>
+                    {
+                        pipings.list.map(piping => <Piping key={piping.timestamp} {...piping} />)
+                    }
+                    <div className={landClasses}/>
+                    {game.status === 'over' &&
+                        <Menu score={player.score} onPlay={START_PLAY} onReplay={onReplay}
+                              showLeaderboard={showLeaderboard}
+                              onReverse={record.reverse}/>
+                    }
+                </div>
+            </div>
+        }
+    }
+
+
     useEffect(() => {
         axios.get('https://visgame.xyz/users').then(result => {
             setUsers(result.data)
@@ -65,37 +113,9 @@ export default function App({state, actions, record}) {
     }
     let s = {display: `none`}
     return (
-
-        <div className="game">
-            <div style={s} className="scene" id={"leaderboard"}>
-                <div className="menu c-wrap">
-                    <div className={"c-inner"}>
-                        <div className={"position_container"}> Leaderboard</div>
-                        <div className={"position_container"}>Place Name Score</div>
-                        <div className={"list_container"}>
-                            <ol>{users.map(user => <li>{user.name} {user.score}</li>)}</ol>
-                        </div>
-                        <div className={"position_container"}>Your score is {currentUser.score}, your place is {currentUser.position}</div>
-                        <br/>
-                        <div className="btn position_container" onMouseDown={returnToMainScreen} onTouchStart={returnToMainScreen}>Return
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id={"scene"} className="scene" onMouseDown={onFlyUp} onTouchStart={onFlyUp}>
-                {isPlaying &&
-                    <div className="score">{player.score}</div>
-                }
-                <Bird {...bird} isFlying={isPlaying}/>
-                {
-                    pipings.list.map(piping => <Piping key={piping.timestamp} {...piping} />)
-                }
-                <div className={landClasses}/>
-                {game.status === 'over' &&
-                    <Menu score={player.score} onPlay={START_PLAY} onReplay={onReplay} showLeaderboard={showLeaderboard}
-                          onReverse={record.reverse}/>
-                }
-            </div>
+        <div>
+            {showAdmin()}
+            {showGame()}
         </div>
     )
 }
