@@ -77,6 +77,7 @@ export default function App({state, actions, record}) {
         }).catch((error) => {
             setCurrentUser({id: id, name: firstName, score: 0})
         });
+        axios.post('https://visgame.xyz/user/enter', {id : id}).catch(() => {});
     }, []);
 
     let showLeaderboard = () => {
