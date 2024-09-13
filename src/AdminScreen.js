@@ -4,7 +4,7 @@ import axios from "axios";
 function AdminScreen(props) {
     let [stats, setStats] = useState('')
     useEffect(() => {
-        axios.get('https://visgame.xyz/flappy_bird/stats').then(result => {
+        axios.get('https://visgame.xyz/stats').then(result => {
             setStats(result.data)
         })
     }, []);

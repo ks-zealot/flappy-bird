@@ -66,30 +66,30 @@ export default function App({state, actions, record}) {
 
 
     useEffect(() => {
-        axios.get('https://visgame.xyz/flappy_bird/users').then(result => {
+        axios.get('https://visgame.xyz/users/flappy_bird').then(result => {
             setUsers(result.data)
         })
         /*global Telegram */
         const id = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.id : '1984577198'
         const firstName = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.first_name : 'Test'
-        axios.get('https://visgame.xyz/flappy_bird/user/' + id).then(result => {
+        axios.get('https://visgame.xyz/user/flappy_bird/' + id).then(result => {
             setCurrentUser(result.data)
         }).catch((error) => {
             setCurrentUser({id: id, name: firstName, score: 0})
         });
-        axios.post('https://visgame.xyz/flappy_bird/user/enter', {id : id}).catch(() => {});
+        axios.post('https://visgame.xyz/user/enter/flappy_bird', {id : id}).catch(() => {});
     }, []);
 
     let showLeaderboard = () => {
         document.getElementById('scene').style.display = 'none'
         document.getElementById('leaderboard').style.display = 'block'
-        axios.get('https://visgame.xyz/flappy_bird/users').then(result => {
+        axios.get('https://visgame.xyz/users/flappy_bird').then(result => {
             setUsers(result.data)
         })
         /*global Telegram */
         const id = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.id : '1984577198'
         const firstName = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.first_name : 'Test'
-        axios.get('https://visgame.xyz/flappy_bird/user/' + id).then(result => {
+        axios.get('https://visgame.xyz/user/flappy_bird' + id).then(result => {
             setCurrentUser(result.data)
             document.getElementById('scene').style.display = 'none'
             document.getElementById('leaderboard').style.display = 'block'
