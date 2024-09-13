@@ -89,7 +89,7 @@ export default function App({state, actions, record}) {
         /*global Telegram */
         const id = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.id : '1984577198'
         const firstName = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.first_name : 'Test'
-        axios.get('https://visgame.xyz/user/flappy_bird' + id).then(result => {
+        axios.get('https://visgame.xyz/user/flappy_bird/' + id).then(result => {
             setCurrentUser(result.data)
             document.getElementById('scene').style.display = 'none'
             document.getElementById('leaderboard').style.display = 'block'
