@@ -53,7 +53,7 @@ function saveData(state) {
     const id = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.id : '1984577198'
     const firstName = Telegram.WebApp.initDataUnsafe.user ? Telegram.WebApp.initDataUnsafe.user.first_name : 'Test'
     const score =  player.score
-    axios.post('https://visgame.xyz/flappy_bird/user/save_score', {id : id,  score : score, game : 'flappy_bird'}).catch((error) => {});
+    axios.post('https://visgame.xyz/user/save_score', {id : id,  score : score, game : 'flappy_bird'}).catch((error) => {});
 }
 
 
